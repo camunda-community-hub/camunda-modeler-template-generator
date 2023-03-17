@@ -1,0 +1,59 @@
+[
+  {
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.10.1/resources/schema.json",
+    "name": "Example",
+    "id": "com.example.Example",
+    "appliesTo": [
+      "bpmn:Task"
+    ],
+    "entriesVisible": false,
+    "properties": [
+      {
+        "label": "Example Additional Property",
+        "type": "String",
+        "value": "example",
+        "description": "Example of an additional property",
+        "editable": false,
+        "constraints": {
+          "notEmpty": true
+        },
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "exampleAdditionalProperty"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "exampleFunction",
+        "editable": false,
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "exampleNameProperty"
+        }
+      },
+      {
+        "label": "Example Property",
+        "type": "String",
+        "value": "example",
+        "description": "Example of a property",
+        "editable": false,
+        "constraints": {
+          "notEmpty": true
+        },
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "null"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "org.camunda.community.template.generator.test.templatemixed.TestTemplateMixed",
+        "editable": false,
+        "binding": {
+          "type": "property",
+          "name": "camunda:class"
+        }
+      }
+    ]
+  }
+]

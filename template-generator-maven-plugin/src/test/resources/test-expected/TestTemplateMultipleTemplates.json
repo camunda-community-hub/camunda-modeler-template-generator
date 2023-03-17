@@ -1,0 +1,116 @@
+[
+  {
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.10.1/resources/schema.json",
+    "name": "ExampleOne",
+    "id": "com.example.ExampleOne",
+    "appliesTo": [
+      "bpmn:Task"
+    ],
+    "entriesVisible": false,
+    "properties": [
+      {
+        "label": "Example Additional Property One",
+        "type": "String",
+        "value": "exampleOne",
+        "description": "Example of an additional property",
+        "editable": false,
+        "constraints": {
+          "notEmpty": true
+        },
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "exampleAdditionalPropertyOne"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "exampleFunctionOne",
+        "editable": false,
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "exampleNamePropertyOne"
+        }
+      },
+      {
+        "label": "Example Property",
+        "type": "String",
+        "value": "example",
+        "description": "Example of a property",
+        "editable": false,
+        "constraints": {
+          "notEmpty": true
+        },
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "null"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "org.camunda.community.template.generator.test.templatemultiple.TestTemplateMultiple",
+        "editable": false,
+        "binding": {
+          "type": "property",
+          "name": "camunda:class"
+        }
+      }
+    ]
+  },
+  {
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.10.1/resources/schema.json",
+    "name": "ExampleTwo",
+    "id": "com.example.ExampleTwo",
+    "appliesTo": [
+      "bpmn:Task"
+    ],
+    "entriesVisible": false,
+    "properties": [
+      {
+        "label": "Example Additional Property Two",
+        "type": "String",
+        "value": "exampleTwo",
+        "description": "Example of an additional property",
+        "editable": true,
+        "constraints": {
+          "notEmpty": false
+        },
+        "binding": {
+          "type": "camunda:outputParameter",
+          "source": "${exampleAdditionalPropertyTwo}"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "exampleFunctionTwo",
+        "editable": false,
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "exampleNamePropertyTwo"
+        }
+      },
+      {
+        "label": "Example Property",
+        "type": "String",
+        "value": "example",
+        "description": "Example of a property",
+        "editable": false,
+        "constraints": {
+          "notEmpty": true
+        },
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "null"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "org.camunda.community.template.generator.test.templatemultiple.TestTemplateMultiple",
+        "editable": false,
+        "binding": {
+          "type": "property",
+          "name": "camunda:class"
+        }
+      }
+    ]
+  }
+]

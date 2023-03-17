@@ -1,0 +1,51 @@
+[
+  {
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.10.1/resources/schema.json",
+    "name": "Example",
+    "id": "com.example.Example",
+    "appliesTo": [
+      "bpmn:Task"
+    ],
+    "entriesVisible": false,
+    "properties": [
+      {
+        "type": "Hidden",
+        "value": "exampleFunction",
+        "editable": false,
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "exampleNameProperty"
+        }
+      },
+      {
+        "label": "Example Property",
+        "type": "Dropdown",
+        "value": "example",
+        "description": "Example of a property",
+        "editable": false,
+        "choices": [
+          {
+            "name": "exampleChoice",
+            "value": "exampleChoiceValue"
+          }
+        ],
+        "constraints": {
+          "notEmpty": true
+        },
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "null"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "org.camunda.community.template.generator.test.templateparameters.TestTemplateParameters",
+        "editable": false,
+        "binding": {
+          "type": "property",
+          "name": "camunda:class"
+        }
+      }
+    ]
+  }
+]

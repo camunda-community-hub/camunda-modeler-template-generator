@@ -1,0 +1,72 @@
+[
+  {
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.10.1/resources/schema.json",
+    "name": "External Task Example",
+    "id": "com.example.ExternalTaskExample",
+    "appliesTo": [
+      "bpmn:Task"
+    ],
+    "entriesVisible": false,
+    "properties": [
+      {
+        "label": "External Task Example Additional Property",
+        "type": "String",
+        "value": "example",
+        "description": "Example of an additional property",
+        "editable": false,
+        "constraints": {
+          "notEmpty": true
+        },
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "exampleAdditionalProperty"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "external",
+        "editable": false,
+        "constraints": {
+          "notEmpty": false
+        },
+        "binding": {
+          "type": "property",
+          "name": "camunda:type"
+        }
+      },
+      {
+        "label": "External Topic",
+        "type": "String",
+        "editable": true,
+        "constraints": {
+          "notEmpty": true
+        },
+        "binding": {
+          "type": "property",
+          "name": "camunda:topic"
+        }
+      },
+      {
+        "label": "External Task Priority",
+        "type": "String",
+        "editable": true,
+        "constraints": {
+          "notEmpty": false
+        },
+        "binding": {
+          "type": "property",
+          "name": "camunda:taskPriority"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "org.camunda.community.template.generator.test.templateexternaltask.TestTemplateExternalTask",
+        "editable": false,
+        "binding": {
+          "type": "property",
+          "name": "camunda:class"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.10.1/resources/schema.json",
+    "name": "Example",
+    "id": "com.example.Example",
+    "appliesTo": [
+      "bpmn:Task"
+    ],
+    "entriesVisible": false,
+    "properties": [
+      {
+        "label": "Example Additional Property",
+        "type": "String",
+        "value": "example",
+        "description": "Example of an additional property",
+        "editable": false,
+        "constraints": {
+          "notEmpty": true
+        },
+        "test": {
+          "type": "camunda:inputParameter",
+          "name": "exampleAdditionalProperty"
+        }
+      },
+      {
+        "type": "Hidden",
