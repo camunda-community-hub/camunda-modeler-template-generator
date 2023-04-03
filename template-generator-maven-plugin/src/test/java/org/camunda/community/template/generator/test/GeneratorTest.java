@@ -358,9 +358,13 @@ public class GeneratorTest {
             false);
 
     assertEquals(
-        FileUtils.fileRead(new File("src/test/resources/test-expected/TestTemplateTemplates.json")),
+        FileUtils.fileRead(new File("src/test/resources/test-expected/TestTemplateTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
         FileUtils.fileRead(
-            new File("target/test-files/resources/actual/TestTemplateTemplates.json")),
+                new File("target/test-files/resources/actual/TestTemplateTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
         "Files are not equal!");
   }
 
@@ -375,9 +379,13 @@ public class GeneratorTest {
 
     assertEquals(
         FileUtils.fileRead(
-            new File("src/test/resources/test-expected/TestTemplateMixedTemplates.json")),
+                new File("src/test/resources/test-expected/TestTemplateMixedTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
         FileUtils.fileRead(
-            new File("target/test-files/resources/actual/TestTemplateMixedTemplates.json")),
+                new File("target/test-files/resources/actual/TestTemplateMixedTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
         "Files are not equal!");
   }
 
@@ -392,9 +400,13 @@ public class GeneratorTest {
 
     assertEquals(
         FileUtils.fileRead(
-            new File("src/test/resources/test-expected/TestTemplateParametersTemplates.json")),
+                new File("src/test/resources/test-expected/TestTemplateParametersTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
         FileUtils.fileRead(
-            new File("target/test-files/resources/actual/TestTemplateParametersTemplates.json")),
+                new File("target/test-files/resources/actual/TestTemplateParametersTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
         "Files are not equal!");
   }
 
@@ -409,9 +421,13 @@ public class GeneratorTest {
 
     assertEquals(
         FileUtils.fileRead(
-            new File("src/test/resources/test-expected/TestTemplateMultipleTemplates.json")),
+                new File("src/test/resources/test-expected/TestTemplateMultipleTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
         FileUtils.fileRead(
-            new File("target/test-files/resources/actual/TestTemplateMultipleTemplates.json")),
+                new File("target/test-files/resources/actual/TestTemplateMultipleTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
         "Files are not equal!");
   }
 
@@ -426,9 +442,14 @@ public class GeneratorTest {
 
     assertEquals(
         FileUtils.fileRead(
-            new File("src/test/resources/test-expected/TestTemplateExternalTaskTemplates.json")),
+                new File("src/test/resources/test-expected/TestTemplateExternalTaskTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
         FileUtils.fileRead(
-            new File("target/test-files/resources/actual/TestTemplateExternalTaskTemplates.json")),
+                new File(
+                    "target/test-files/resources/actual/TestTemplateExternalTaskTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
         "Files are not equal!");
   }
 
