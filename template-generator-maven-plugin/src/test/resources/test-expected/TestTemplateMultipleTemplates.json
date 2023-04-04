@@ -1,6 +1,6 @@
 [
   {
-    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.10.1/resources/schema.json",
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.12.0/resources/schema.json",
     "name": "ExampleOne",
     "id": "com.example.ExampleOne",
     "appliesTo": [
@@ -57,7 +57,7 @@
     ]
   },
   {
-    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.10.1/resources/schema.json",
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.12.0/resources/schema.json",
     "name": "ExampleTwo",
     "id": "com.example.ExampleTwo",
     "appliesTo": [

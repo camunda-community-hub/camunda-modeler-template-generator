@@ -1,6 +1,6 @@
 [
   {
-    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.10.1/resources/schema.json",
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.12.0/resources/schema.json",
     "name": "Example",
     "id": "com.example.Example",
     "appliesTo": [

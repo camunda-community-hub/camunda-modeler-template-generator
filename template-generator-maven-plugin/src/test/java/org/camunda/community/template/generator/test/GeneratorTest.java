@@ -352,7 +352,7 @@ public class GeneratorTest {
   public void testTemplateJsonOutput() throws MojoExecutionException, IOException {
     new Generator()
         .generate(
-            "0.10.1",
+            "0.12.0",
             "org.camunda.community.template.generator.test.template",
             "target/test-files/resources/actual",
             false);
@@ -372,7 +372,7 @@ public class GeneratorTest {
   public void testTemplateMixedJsonOutput() throws MojoExecutionException, IOException {
     new Generator()
         .generate(
-            "0.10.1",
+            "0.12.0",
             "org.camunda.community.template.generator.test.templatemixed",
             "target/test-files/resources/actual",
             false);
@@ -393,7 +393,7 @@ public class GeneratorTest {
   public void testTemplateParametersJsonOutput() throws MojoExecutionException, IOException {
     new Generator()
         .generate(
-            "0.10.1",
+            "0.12.0",
             "org.camunda.community.template.generator.test.templateparameters",
             "target/test-files/resources/actual",
             false);
@@ -414,7 +414,7 @@ public class GeneratorTest {
   public void testTemplateMultipleJsonOutput() throws MojoExecutionException, IOException {
     new Generator()
         .generate(
-            "0.10.1",
+            "0.12.0",
             "org.camunda.community.template.generator.test.templatemultiple",
             "target/test-files/resources/actual",
             true);
@@ -435,7 +435,7 @@ public class GeneratorTest {
   public void testTemplateExternalTaskJsonOutput() throws MojoExecutionException, IOException {
     new Generator()
         .generate(
-            "0.10.1",
+            "0.12.0",
             "org.camunda.community.template.generator.test.templateexternaltask",
             "target/test-files/resources/actual",
             false);
@@ -455,7 +455,8 @@ public class GeneratorTest {
 
   @Test
   public void testMalformedJSON() throws Exception {
-    String schema = new Generator().downloadSchema(SCHEMA_BASE_URL + "/resources/schema.json");
+    String schema =
+        new Generator().downloadSchema(SCHEMA_BASE_URL + "@0.12.0" + "/resources/schema.json");
 
     Exception exception =
         assertThrows(
