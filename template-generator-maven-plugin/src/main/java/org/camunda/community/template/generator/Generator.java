@@ -15,6 +15,7 @@ import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 import java.io.*;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -40,31 +41,43 @@ public class Generator {
         scanResult.getClassesWithMethodAnnotation(
             org.camunda.community.template.generator.Template.class.getName());
 
+    Set<String> templateIDs = new HashSet<>();
+
     // Iterate through all classes containing a Template annotation
     for (ClassInfo classInfo : classInfoList) {
-      // Set template file output path
-      String filePath = outputDir + File.separator + classInfo.getSimpleName() + "Templates.json";
+      if (classInfo.hasDeclaredMethodAnnotation(
+          org.camunda.community.template.generator.Template.class.getName())) {
+        // Set template file output path
+        String filePath = outputDir + File.separator + classInfo.getSimpleName() + "Templates.json";
 
-      // Parse templates of the current class
-      List<org.camunda.community.template.generator.objectmodel.Template> templates =
-          GeneratorParser.processTemplates(classInfo);
-      for (org.camunda.community.template.generator.objectmodel.Template template : templates) {
-        template.setSchemaURL(schemaURL);
-      }
+        // Parse templates of the current class
+        List<org.camunda.community.template.generator.objectmodel.Template> templates =
+            GeneratorParser.processTemplates(classInfo);
+        for (org.camunda.community.template.generator.objectmodel.Template template : templates) {
+          template.setSchemaURL(schemaURL);
 
-      // Serialize object model to JSON
-      String resultJSON = (new GsonBuilder()).setPrettyPrinting().create().toJson(templates);
-      writeJsonToFile(filePath, resultJSON);
+          if (!templateIDs.contains(template.getTemplateID())) {
+            templateIDs.add(template.getTemplateID());
+          } else {
+            throw new MojoExecutionException(
+                "Duplicate template id found: " + template.getTemplateID());
+          }
+        }
 
-      // Validate JSON file
-      if (!skipValidation) {
-        // Download schema for validation
-        String schema = downloadSchema(schemaURL);
+        // Serialize object model to JSON
+        String resultJSON = (new GsonBuilder()).setPrettyPrinting().create().toJson(templates);
+        writeJsonToFile(filePath, resultJSON);
 
-        // Validate file using schema
-        validateJsonFile(filePath, schema);
-      } else {
-        logger.warning("Skipping JSON schema validation!");
+        // Validate JSON file
+        if (!skipValidation) {
+          // Download schema for validation
+          String schema = downloadSchema(schemaURL);
+
+          // Validate file using schema
+          validateJsonFile(filePath, schema);
+        } else {
+          logger.warning("Skipping JSON schema validation!");
+        }
       }
     }
   }

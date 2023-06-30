@@ -502,4 +502,24 @@ public class GeneratorTest {
 
     assertThat(actualBinding).usingRecursiveComparison().isEqualTo(expectedBinding);
   }
+
+  @Test
+  public void testDuplicateTemplateID() {
+    Exception exception =
+        assertThrows(
+            MojoExecutionException.class,
+            () -> {
+              new Generator()
+                  .generate(
+                      "0.12.0",
+                      "org.camunda.community.template.generator.test.duplicatetemplateid",
+                      "target/test-files/resources/duplicateid",
+                      false);
+            });
+
+    String expectedMessage = "Duplicate template id found: com.example.Example";
+    String actualMessage = exception.getMessage();
+
+    assertEquals(expectedMessage, actualMessage);
+  }
 }

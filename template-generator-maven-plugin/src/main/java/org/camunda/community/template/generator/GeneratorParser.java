@@ -386,7 +386,7 @@ public class GeneratorParser {
     List<Template> templates = new ArrayList<>();
 
     // Iterate through all methods of a class
-    for (MethodInfo methodInfo : classInfo.getMethodInfo()) {
+    for (MethodInfo methodInfo : classInfo.getDeclaredMethodInfo()) {
       Template template = processSingleTemplate(methodInfo);
 
       if (template != null) {
