@@ -14,7 +14,7 @@ To use this Maven plugin in your project, you simply have to add the following c
 <plugin>
    <groupId>org.camunda.community.template.generator</groupId>
    <artifactId>template-generator-maven-plugin</artifactId>
-   <version>1.0.0</version>
+   <version>1.0.1</version>
    <executions>
       <execution>
          <goals>
