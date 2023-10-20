@@ -13,7 +13,13 @@ import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
@@ -33,20 +39,24 @@ public class Generator {
         SCHEMA_BASE_URL
             + (schemaVersion.equals("null") ? "" : "@" + schemaVersion)
             + "/resources/schema.json";
+    JsonSchema schema = null;
 
     logger.info("Scanning for annotations ...");
 
     ScanResult scanResult = new ClassGraph().acceptPackages(scanPackages).enableAllInfo().scan();
     ClassInfoList classInfoList =
-        scanResult.getClassesWithMethodAnnotation(
-            org.camunda.community.template.generator.Template.class.getName());
+        scanResult.getClassesWithMethodAnnotation(Template.class.getName());
 
     Set<String> templateIDs = new HashSet<>();
 
+    if (!skipValidation) {
+      // Download schema for validation
+      schema = downloadSchema(schemaURL);
+    }
+
     // Iterate through all classes containing a Template annotation
     for (ClassInfo classInfo : classInfoList) {
-      if (classInfo.hasDeclaredMethodAnnotation(
-          org.camunda.community.template.generator.Template.class.getName())) {
+      if (classInfo.hasDeclaredMethodAnnotation(Template.class.getName())) {
         // Set template file output path
         String filePath = outputDir + File.separator + classInfo.getSimpleName() + "Templates.json";
 
@@ -70,9 +80,6 @@ public class Generator {
 
         // Validate JSON file
         if (!skipValidation) {
-          // Download schema for validation
-          String schema = downloadSchema(schemaURL);
-
           // Validate file using schema
           validateJsonFile(filePath, schema);
         } else {
@@ -106,7 +113,7 @@ public class Generator {
    * @param schemaURL The URL from where to download the schema
    * @return The schema as String
    */
-  public String downloadSchema(String schemaURL) throws MojoExecutionException {
+  public JsonSchema downloadSchema(String schemaURL) throws MojoExecutionException {
     StringBuilder schema = new StringBuilder();
 
     try (BufferedReader reader =
@@ -121,26 +128,23 @@ public class Generator {
       throw new MojoExecutionException("Failed to download schema!", e);
     }
 
-    return schema.toString();
+    JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
+    return schemaFactory.getSchema(new ByteArrayInputStream(schema.toString().getBytes()));
   }
 
   /**
    * Validates a JSON file against the provided schema
    *
    * @param filePath The file path to validate
-   * @param schemaTemplate The schema template to use for validation
+   * @param schema The JSON schema to use for validation
    * @throws MojoExecutionException
    */
-  public void validateJsonFile(String filePath, String schemaTemplate)
-      throws MojoExecutionException {
+  public void validateJsonFile(String filePath, JsonSchema schema) throws MojoExecutionException {
     ObjectMapper objectMapper = new ObjectMapper();
-    JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
 
     try {
       File file = new File(filePath);
       JsonNode json = objectMapper.readTree(new FileInputStream(file));
-      JsonSchema schema =
-          schemaFactory.getSchema(new ByteArrayInputStream(schemaTemplate.getBytes()));
       Set<ValidationMessage> validationResult = schema.validate(json);
 
       // Print validation errors

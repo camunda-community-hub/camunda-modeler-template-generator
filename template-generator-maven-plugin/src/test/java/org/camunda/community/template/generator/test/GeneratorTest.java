@@ -6,6 +6,7 @@ import static org.camunda.community.template.generator.GeneratorPlugin.SCHEMA_BA
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.networknt.schema.JsonSchema;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ClassInfoList;
@@ -18,7 +19,11 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.camunda.community.template.generator.Generator;
 import org.camunda.community.template.generator.GeneratorParser;
 import org.camunda.community.template.generator.TemplateProperty;
-import org.camunda.community.template.generator.objectmodel.*;
+import org.camunda.community.template.generator.objectmodel.Binding;
+import org.camunda.community.template.generator.objectmodel.Choice;
+import org.camunda.community.template.generator.objectmodel.Constraint;
+import org.camunda.community.template.generator.objectmodel.Property;
+import org.camunda.community.template.generator.objectmodel.Template;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -455,7 +460,7 @@ public class GeneratorTest {
 
   @Test
   public void testMalformedJSON() throws Exception {
-    String schema =
+    JsonSchema schema =
         new Generator().downloadSchema(SCHEMA_BASE_URL + "@0.12.0" + "/resources/schema.json");
 
     Exception exception =
