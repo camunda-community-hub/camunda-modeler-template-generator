@@ -47,10 +47,9 @@ public class GeneratorPlugin extends AbstractMojo {
     getLog().info("Output directory: " + outputDir);
     getLog().info("Scanned package: " + scanPackages);
 
-    new Generator().generate(schemaVersion, scanPackages, outputDir, skipValidation);
+    new Generator(getLog()).generate(schemaVersion, scanPackages, outputDir, skipValidation);
   }
 
-  @SuppressWarnings("unchecked")
   private void setClasspath() throws MojoExecutionException {
     final PluginDescriptor pluginDescriptor =
         (PluginDescriptor) getPluginContext().get("pluginDescriptor");

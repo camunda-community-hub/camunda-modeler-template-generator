@@ -24,13 +24,39 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
+import org.apache.maven.monitor.logging.DefaultLog;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.logging.Log;
+import org.codehaus.plexus.logging.console.ConsoleLogger;
 
+/** */
 public class Generator {
 
-  Logger logger = Logger.getLogger(Generator.class.getName());
+  private Log logger = null;
 
+  /** Default constructor. */
+  public Generator() {
+    this(new DefaultLog(new ConsoleLogger()));
+  }
+
+  /**
+   * Constructor for specific logging.
+   *
+   * @param log the logger from the Maven context
+   */
+  public Generator(Log log) {
+    this.logger = log;
+  }
+
+  /**
+   * Generate and validate the templates.
+   *
+   * @param schemaVersion Version of the schema for validation
+   * @param scanPackages Packages that should be scanned for annotations
+   * @param outputDir the folder for the generated template files
+   * @param skipValidation flag to skip the json validation
+   * @throws MojoExecutionException in case of an error during template generation
+   */
   public void generate(
       String schemaVersion, String scanPackages, String outputDir, boolean skipValidation)
       throws MojoExecutionException {
@@ -40,14 +66,8 @@ public class Generator {
             + (schemaVersion.equals("null") ? "" : "@" + schemaVersion)
             + "/resources/schema.json";
     JsonSchema schema = null;
-
-    logger.info("Scanning for annotations ...");
-
-    ScanResult scanResult = new ClassGraph().acceptPackages(scanPackages).enableAllInfo().scan();
-    ClassInfoList classInfoList =
-        scanResult.getClassesWithMethodAnnotation(Template.class.getName());
-
     Set<String> templateIDs = new HashSet<>();
+    ClassInfoList classInfoList = scanPackages(scanPackages);
 
     if (!skipValidation) {
       // Download schema for validation
@@ -58,7 +78,8 @@ public class Generator {
     for (ClassInfo classInfo : classInfoList) {
       if (classInfo.hasDeclaredMethodAnnotation(Template.class.getName())) {
         // Set template file output path
-        String filePath = outputDir + File.separator + classInfo.getSimpleName() + "Templates.json";
+        String fileName = classInfo.getSimpleName() + "Templates.json";
+        String filePath = outputDir + File.separator + fileName;
 
         // Parse templates of the current class
         List<org.camunda.community.template.generator.objectmodel.Template> templates =
@@ -74,34 +95,60 @@ public class Generator {
           }
         }
 
-        // Serialize object model to JSON
-        String resultJSON = (new GsonBuilder()).setPrettyPrinting().create().toJson(templates);
-        writeJsonToFile(filePath, resultJSON);
+        writeJsonToFile(filePath, templates);
 
         // Validate JSON file
         if (!skipValidation) {
           // Validate file using schema
           validateJsonFile(filePath, schema);
         } else {
-          logger.warning("Skipping JSON schema validation!");
+          logger.warn("Skipping JSON schema validation!");
         }
       }
     }
   }
 
   /**
+   * Scan for {@link org.camunda.community.template.generator.objectmodel.Template} annotation in
+   * classpath
+   *
+   * @param scanPackages name of package that should be scanned
+   * @return List of class infos
+   */
+  private ClassInfoList scanPackages(String scanPackages) {
+    logger.info("Scanning for annotations ...");
+
+    ScanResult scanResult = new ClassGraph().acceptPackages(scanPackages).enableAllInfo().scan();
+    return scanResult.getClassesWithMethodAnnotation(Template.class.getName());
+  }
+
+  /**
    * Writes the JSON String to a specific file path.
    *
    * @param filePath The path where to save the specified JSON String
-   * @param json The JSON String to write
+   * @param templates List of templates
    * @throws MojoExecutionException
    */
-  private void writeJsonToFile(String filePath, String json) throws MojoExecutionException {
+  private void writeJsonToFile(
+      String filePath,
+      List<org.camunda.community.template.generator.objectmodel.Template> templates)
+      throws MojoExecutionException {
+    // Serialize object model to JSON
+    String resultJSON = (new GsonBuilder()).setPrettyPrinting().create().toJson(templates);
+
     File file = new File(filePath);
     file.getParentFile().mkdirs();
 
+    logger.info(
+        "Create template file '"
+            + file.getName()
+            + "' with "
+            + templates.size()
+            + " "
+            + (templates.size() == 1 ? "entry" : "entries"));
+
     try (FileWriter outputFile = new FileWriter(file)) {
-      outputFile.write(json);
+      outputFile.write(resultJSON);
     } catch (IOException e) {
       throw new MojoExecutionException("Failed to write output file " + filePath, e);
     }
@@ -151,7 +198,7 @@ public class Generator {
       if (validationResult.isEmpty()) {
         logger.info(file.getName() + ": Validation successful");
       } else {
-        validationResult.forEach(vm -> logger.warning(file.getName() + ": " + vm.getMessage()));
+        validationResult.forEach(vm -> logger.warn(file.getName() + ": " + vm.getMessage()));
       }
     } catch (IOException e) {
       throw new MojoExecutionException("JSON validation failed! File: " + filePath, e);
