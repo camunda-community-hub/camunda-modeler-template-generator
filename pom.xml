@@ -10,6 +10,26 @@
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Camunda modeler template generator core</description>
 
+	<url>https://github.com/camunda-community-hub/camunda-modeler-template-generator</url>
+
+	<licenses>
+		<license>
+			<name>Apache-2.0</name>
+			<url>https://raw.githubusercontent.com/camunda-community-hub/camunda-modeler-template-generator/main/LICENSE.md</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<contributors>
+		<contributor>
+			<name>Sascha Hanss</name>
+			<email>sascha.hanss@prostep.com</email>
+			<organization>PROSTEP AG</organization>
+			<organizationUrl>https://www.prostep.com</organizationUrl>
+			<timezone>Europe/Berlin</timezone>
+		</contributor>
+	</contributors>
+	
     <scm>
         <url>https://github.com/camunda-community-hub/camunda-modeler-template-generator</url>
         <connection>scm:git:git@github.com:camunda-community-hub/camunda-modeler-template-generator.git</connection>
@@ -98,7 +118,7 @@
                 <version>3.6.3</version>
             </plugin>
 
-            <!-- Google code format plugin -->
+			<!-- Google code format plugin -->
             <plugin>
                 <groupId>com.spotify.fmt</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
@@ -112,7 +132,7 @@
                 </executions>
             </plugin>
 
-            <!-- JaCoCo Plugin -->
+			<!-- JaCoCo Plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -131,17 +151,17 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-                    <!-- Threshold -->
+					<!-- Threshold -->
                 </executions>
             </plugin>
-            <!-- Surefire plugin -->
+			<!-- Surefire plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
             </plugin>
 
-            <!-- flaky test extractor plugin -->
+			<!-- flaky test extractor plugin -->
             <plugin>
                 <groupId>io.zeebe</groupId>
                 <artifactId>flaky-test-extractor-maven-plugin</artifactId>
