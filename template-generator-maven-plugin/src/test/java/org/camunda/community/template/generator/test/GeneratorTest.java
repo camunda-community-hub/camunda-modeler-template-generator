@@ -488,7 +488,8 @@ public class GeneratorTest {
               new Generator().downloadSchema("malformedTestURL");
             });
 
-    String expectedMessage = "Failed to download schema!";
+    String expectedMessage =
+        "Failed to download schema: malformedTestURL (If you are offline consider to set skipValidation to true)";
     String actualMessage = exception.getMessage();
 
     assertEquals(expectedMessage, actualMessage);
