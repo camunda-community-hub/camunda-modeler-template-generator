@@ -60,7 +60,7 @@ public class GeneratorPlugin extends AbstractMojo {
           .forEach(
               c -> {
                 try {
-                  classRealm.addURL(new URL("file:///" + c.toString()));
+                  classRealm.addURL(new URL("file:///" + c));
                 } catch (MalformedURLException e1) {
                   throw new IllegalArgumentException("Error create file URL: " + c, e1);
                 }

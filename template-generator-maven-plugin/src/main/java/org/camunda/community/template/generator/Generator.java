@@ -172,7 +172,11 @@ public class Generator {
 
       logger.info("Successfully downloaded schema from: " + schemaURL);
     } catch (IOException e) {
-      throw new MojoExecutionException("Failed to download schema!", e);
+      throw new MojoExecutionException(
+          "Failed to download schema: "
+              + schemaURL
+              + " (If you are offline consider to set skipValidation to true)",
+          e);
     }
 
     JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
