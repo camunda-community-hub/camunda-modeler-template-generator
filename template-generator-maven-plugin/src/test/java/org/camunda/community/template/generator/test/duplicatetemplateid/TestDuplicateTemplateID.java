@@ -11,6 +11,8 @@ public class TestDuplicateTemplateID extends TestTemplate {
   @Template(
       name = "Example", //
       id = "com.example.Example", //
+      description = "Example of a Template", //
+      documentationRef = "https://docs.camunda.io", //
       appliesTo = {"bpmn:Task"}, //
       function = "exampleFunction", //
       functionNameProperty = "exampleNameProperty", //
@@ -19,6 +21,7 @@ public class TestDuplicateTemplateID extends TestTemplate {
         @TemplateProperty(
             label = "Example Additional Property", //
             description = "Example of an additional property", //
+            documentationRef = "https://docs.camunda.io", //
             parameterType = TemplateProperty.INPUT, //
             type = TemplateProperty.STRING, //
             value = "example", //

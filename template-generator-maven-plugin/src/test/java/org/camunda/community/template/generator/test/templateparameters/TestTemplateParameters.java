@@ -9,6 +9,7 @@ public class TestTemplateParameters {
   @TemplateProperty(
       label = "Example Property", //
       description = "Example of a property", //
+      documentationRef = "https://docs.camunda.io", //
       parameterType = TemplateProperty.INPUT, //
       type = TemplateProperty.DROPDOWN, //
       choices = {@Choice(name = "exampleChoice", value = "exampleChoiceValue")}, //
@@ -20,6 +21,8 @@ public class TestTemplateParameters {
   @Template(
       name = "Example", //
       id = "com.example.Example", //
+      description = "Example of a Template", //
+      documentationRef = "https://docs.camunda.io", //
       appliesTo = {"bpmn:Task"}, //
       function = "exampleFunction", //
       functionNameProperty = "exampleNameProperty", //

@@ -3,6 +3,8 @@
     "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.12.0/resources/schema.json",
     "name": "ExampleOne",
     "id": "com.example.ExampleOne",
+    "description": "Example of a Template",
+    "documentationRef": "https://docs.camunda.io",
     "appliesTo": [
       "bpmn:Task"
     ],
@@ -13,6 +15,7 @@
         "type": "String",
         "value": "exampleOne",
         "description": "Example of an additional property",
+        "documentationRef": "https://docs.camunda.io",
         "editable": false,
         "constraints": {
           "notEmpty": true
@@ -36,6 +39,7 @@
         "type": "String",
         "value": "example",
         "description": "Example of a property",
+        "documentationRef": "https://docs.camunda.io",
         "editable": false,
         "constraints": {
           "notEmpty": true
@@ -60,6 +64,8 @@
     "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.12.0/resources/schema.json",
     "name": "ExampleTwo",
     "id": "com.example.ExampleTwo",
+    "description": "Example of a Template",
+    "documentationRef": "https://docs.camunda.io",
     "appliesTo": [
       "bpmn:Task"
     ],
@@ -70,6 +76,7 @@
         "type": "String",
         "value": "exampleTwo",
         "description": "Example of an additional property",
+        "documentationRef": "https://docs.camunda.io",
         "editable": true,
         "constraints": {
           "notEmpty": false
@@ -93,6 +100,7 @@
         "type": "String",
         "value": "example",
         "description": "Example of a property",
+        "documentationRef": "https://docs.camunda.io",
         "editable": false,
         "constraints": {
           "notEmpty": true

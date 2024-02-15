@@ -30,6 +30,16 @@ public @interface Template {
   public String id();
 
   /**
+   * @return description of the activity
+   */
+  public String description() default "";
+
+  /**
+   * @return documentationRef of the activity
+   */
+  public String documentationRef() default "";
+
+  /**
    * @return types the activity should apply to
    */
   public String[] appliesTo();

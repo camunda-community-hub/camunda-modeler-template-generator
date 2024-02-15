@@ -12,6 +12,10 @@ public class Template {
 
   private String id;
 
+  private String description;
+
+  private String documentationRef;
+
   private String[] appliesTo;
 
   private boolean entriesVisible;
@@ -58,6 +62,34 @@ public class Template {
    */
   public void setTemplateID(String templateID) {
     this.id = templateID;
+  }
+
+  /**
+   * @return description
+   */
+  public String getDescription() {
+    return description;
+  }
+
+  /**
+   * @param description
+   */
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  /**
+   * @return documentationRef
+   */
+  public String getDocumentationRef() {
+    return documentationRef;
+  }
+
+  /**
+   * @param documentationRef
+   */
+  public void setDocumentationRef(String documentationRef) {
+    this.documentationRef = documentationRef;
   }
 
   /**

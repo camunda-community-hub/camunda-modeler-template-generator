@@ -44,36 +44,39 @@ This annotation can be used to annotate fields and represents one property in a 
 The following matrix gives an overview about the arguments for this annotation:
 | Name | Type | Default value | Optional | Description |
 |-|:-:|:-:|:-:|-|
-|label			|String		|""		|✔️|The label that will be displayed in the Modeler.|
-|type			|String		|		|❌|The property type, e.g. String, Hidden, Dropdown.|
-|value			|String		|""		|✔️|The default value selected in the Modeler.|
-|choices		|@Choice[]	|{}		|✔️|An array containing the choices available in a Dropdown menu.|
-|description	|String		|""		|✔️|The description that is shown at the entry in the Modeler.|
-|parameterType	|String		|"input"|✔️|The parameter type of the property, available options are: "input", "output", "property".|
-|bindingName	|String		|""		|✔️|The binding name that is used together with the parameter type.|
-|scriptFormat	|String		|""		|✔️|The script format to use within the binding.|
-|notEmpty		|boolean	|false	|✔️|Option to say whether an input can be empty or not.|
-|isEditable		|boolean	|true	|✔️|Option to say whether an input can be edited by the user or not.|
+|label|String|""|✔️|The label that will be displayed in the Modeler.|
+|type|String||❌|The property type, e.g. String, Hidden, Dropdown.|
+|value|String|""|✔️|The default value selected in the Modeler.|
+|choices|@Choice[]|{}|✔️|An array containing the choices available in a Dropdown menu.|
+|description|String|""|✔️|The description that is shown at the entry in the Modeler.|
+|documentationRef|String|""|✔️|A URL pointing to documentation.|
+|parameterType|String|"input"|✔️|The parameter type of the property, available options are: "input", "output", "property".|
+|bindingName|String|""|✔️|The binding name that is used together with the parameter type.|
+|scriptFormat|String|""|✔️|The script format to use within the binding.|
+|notEmpty|boolean|false|✔️|Option to say whether an input can be empty or not.|
+|isEditable|boolean|true|✔️|Option to say whether an input can be edited by the user or not.|
 
 `@Template`
 The Template annotation can be used to annotate methods. This annotation is absolutely **necessary** because only classes that contain this annotation will be scanned. It represents a Template in the Modeler and contains the corresponding properties which are read from fields of the same class hierarchy annotated with `TemplateProperty`. Since there might be several activities in one Java class which rely on different properties the `Template` annotation can optionally contain a list of multiple `TemplateProperty` annotations that will be included exclusively in the corresponding Template.
 The following matrix gives an overview about the arguments for this annotation:
 | Name | Type | Default value | Optional | Description |
 |-|:-:|:-:|:-:|-|
-|name|String| |❌|The name of the Template shown in the Modeler.|
-|id|String|	|❌|The id of the Template, e.g. "com.example.Template".|
-|appliesTo|String[]| |❌|What this Template should apply to.|
+|name|String||❌|The name of the Template shown in the Modeler.|
+|id|String||❌|The id of the Template, e.g. "com.example.Template".|
+|description|String|""|✔️|The description that is shown at the entry in the Modeler.|
+|documentationRef|String|""|✔️|A URL pointing to documentation.|
+|appliesTo|String[]||❌|What this Template should apply to.|
 |function|String|""|✔️|The name of the function that should be called.|
 |functionNameProperty|String|""|✔️|The binding name of the function that should be called.|
-|templateProperties|@TemplateProperty[]|{}|✔️|An optional additional array of TemplateProperty annotations..|
+|templateProperties|@TemplateProperty[]|{}|✔️|An optional additional array of TemplateProperty annotations.|
 |entriesVisible|boolean|true|✔️|Option to say if the properties should be visible in the Modeler.|
 
 `@Choice`
 This annotation should only be used in the `choices` field of the `TemplateProperty` annotation. It represents one entry of a dropdown menu.
 | Name | Type | Default value | Optional | Description |
 |-|:-:|:-:|:-:|-|
-|name|String| |❌|The name of the dropdown menu entry.
-|value|String| |❌|The value of the dropdown menu entry.
+|name|String||❌|The name of the dropdown menu entry.
+|value|String||❌|The value of the dropdown menu entry.
 
 #### Example 1
 ```java
@@ -88,6 +91,7 @@ This annotation should only be used in the `choices` field of the `TemplatePrope
 ```java
  @Template(name = "Example",
             id = "com.example.Example",
+            description = "Example Template",
             appliesTo = { "bpmn:Task" },
             templateProperties = {
                     @TemplateProperty(label = "Example Additional Property",

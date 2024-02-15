@@ -3,6 +3,8 @@
     "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.12.0/resources/schema.json",
     "name": "Example",
     "id": "com.example.Example",
+    "description": "Example of a Template",
+    "documentationRef": "https://docs.camunda.io",
     "appliesTo": [
       "bpmn:Task"
     ],
@@ -22,6 +24,7 @@
         "type": "Dropdown",
         "value": "example",
         "description": "Example of a property",
+        "documentationRef": "https://docs.camunda.io",
         "editable": false,
         "choices": [
           {

@@ -10,12 +10,15 @@ public class TestTemplateExternalTask {
   @Template(
       name = "External Task Example", //
       id = "com.example.ExternalTaskExample", //
+      description = "Example of a Template", //
+      documentationRef = "https://docs.camunda.io", //
       appliesTo = {"bpmn:Task"}, //
       entriesVisible = false, //
       templateProperties = {
         @TemplateProperty(
             label = "External Task Example Additional Property", //
             description = "Example of an additional property", //
+            documentationRef = "https://docs.camunda.io", //
             parameterType = TemplateProperty.INPUT, //
             type = TemplateProperty.STRING, //
             value = "example", //

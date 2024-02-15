@@ -11,6 +11,8 @@ public class Property {
 
   private String description;
 
+  private String documentationRef;
+
   private String propertyType;
 
   private boolean editable;
@@ -75,6 +77,20 @@ public class Property {
    */
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  /**
+   * @return documentationRef
+   */
+  public String getDocumentationRef() {
+    return documentationRef;
+  }
+
+  /**
+   * @param documentationRef
+   */
+  public void setDocumentationRef(String documentationRef) {
+    this.documentationRef = documentationRef;
   }
 
   /**

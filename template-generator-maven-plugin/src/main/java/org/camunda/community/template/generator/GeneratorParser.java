@@ -22,6 +22,8 @@ public class GeneratorParser {
 
   public static final String DESCRIPTION = "description";
 
+  public static final String DOCUMENTATION_REF = "documentationRef";
+
   public static final String INDEX = "index";
 
   public static final String BINDING = "binding";
@@ -155,6 +157,11 @@ public class GeneratorParser {
       property.setDescription(description);
     }
 
+    String documentationRef = String.valueOf(fieldParameters.get(DOCUMENTATION_REF));
+    if (!documentationRef.isBlank()) {
+      property.setDocumentationRef(documentationRef);
+    }
+
     String bindingName = String.valueOf(fieldParameters.get(BINDING_NAME));
     String scriptFormat = String.valueOf(fieldParameters.get(SCRIPT_FORMAT));
     if (!bindingName.isBlank()) {
@@ -197,6 +204,16 @@ public class GeneratorParser {
     String templateID = String.valueOf(methodParameters.get(TEMPLATE_ID));
     if (!templateID.isBlank()) {
       template.setTemplateID(templateID);
+    }
+
+    String description = String.valueOf(methodParameters.get(DESCRIPTION));
+    if (!description.isBlank()) {
+      template.setDescription(description);
+    }
+
+    String documentationRef = String.valueOf(methodParameters.get(DOCUMENTATION_REF));
+    if (!documentationRef.isBlank()) {
+      template.setDocumentationRef(documentationRef);
     }
 
     // Add method specific properties
