@@ -8,6 +8,7 @@ public class TestTemplateMixed {
   @TemplateProperty(
       label = "Example Property", //
       description = "Example of a property", //
+      documentationRef = "https://docs.camunda.io", //
       parameterType = TemplateProperty.INPUT, //
       type = TemplateProperty.STRING, //
       value = "example", //
@@ -18,6 +19,8 @@ public class TestTemplateMixed {
   @Template(
       name = "Example", //
       id = "com.example.Example", //
+      description = "Example of a Template", //
+      documentationRef = "https://docs.camunda.io", //
       appliesTo = {"bpmn:Task"}, //
       function = "exampleFunction", //
       functionNameProperty = "exampleNameProperty", //
@@ -26,6 +29,7 @@ public class TestTemplateMixed {
         @TemplateProperty(
             label = "Example Additional Property", //
             description = "Example of an additional property", //
+            documentationRef = "https://docs.camunda.io", //
             parameterType = TemplateProperty.INPUT, //
             type = TemplateProperty.STRING, //
             value = "example", //

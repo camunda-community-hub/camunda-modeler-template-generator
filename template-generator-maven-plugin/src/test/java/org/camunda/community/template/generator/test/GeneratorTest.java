@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class GeneratorTest {
+class GeneratorTest {
 
   List<ClassInfo> classInfosTemplate = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public class GeneratorTest {
   }
 
   @BeforeEach
-  public void testSomething() {
+  void testSomething() {
     for (ClassInfo classInfo : scan("org.camunda.community.template.generator.test.template")) {
       classInfosTemplate.clear();
       classInfosTemplate.add(classInfo);
@@ -82,12 +82,14 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testTemplate() {
+  void testTemplate() {
     List<Template> templates = new ArrayList<>();
 
     Template template = new Template();
     template.setTemplateName("Example");
     template.setTemplateID("com.example.Example");
+    template.setDescription("Example of a Template");
+    template.setDocumentationRef("https://docs.camunda.io");
     template.setAppliesTo(new String[] {"bpmn:Task"});
     template.setEntriesVisible(false);
 
@@ -96,6 +98,7 @@ public class GeneratorTest {
     templatePropertyExample.setType(TemplateProperty.STRING);
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of an additional property");
+    templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
     templatePropertyExample.setBinding(
         new Binding("camunda:inputParameter", "exampleAdditionalProperty"));
     templatePropertyExample.setEditable(false);
@@ -125,7 +128,7 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testTemplateParameters() {
+  void testTemplateParameters() {
     List<Property> properties = new ArrayList<>();
 
     Choice exampleChoice = new Choice("", "");
@@ -138,6 +141,7 @@ public class GeneratorTest {
     templatePropertyExample.setChoices(new Choice[] {exampleChoice});
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of a property");
+    templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
     templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "null"));
     templatePropertyExample.setEditable(false);
     templatePropertyExample.setConstraint(new Constraint(true));
@@ -151,12 +155,14 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testTemplateMixed() {
+  void testTemplateMixed() {
     List<Template> templates = new ArrayList<>();
 
     Template template = new Template();
     template.setTemplateName("Example");
     template.setTemplateID("com.example.Example");
+    template.setDescription("Example of a Template");
+    template.setDocumentationRef("https://docs.camunda.io");
     template.setAppliesTo(new String[] {"bpmn:Task"});
     template.setEntriesVisible(false);
 
@@ -168,6 +174,7 @@ public class GeneratorTest {
     templatePropertyExample.setType(TemplateProperty.STRING);
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of a property");
+    templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
     templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "null"));
     templatePropertyExample.setEditable(false);
     templatePropertyExample.setConstraint(constraint);
@@ -177,6 +184,7 @@ public class GeneratorTest {
     templateAdditionalPropertyExample.setType(TemplateProperty.STRING);
     templateAdditionalPropertyExample.setValue("example");
     templateAdditionalPropertyExample.setDescription("Example of an additional property");
+    templateAdditionalPropertyExample.setDocumentationRef("https://docs.camunda.io");
     templateAdditionalPropertyExample.setBinding(
         new Binding("camunda:inputParameter", "exampleAdditionalProperty"));
     templateAdditionalPropertyExample.setEditable(false);
@@ -208,18 +216,22 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testTemplateMultiple() {
+  void testTemplateMultiple() {
     List<Template> templates = new ArrayList<>();
 
     Template templateOne = new Template();
     templateOne.setTemplateName("ExampleOne");
     templateOne.setTemplateID("com.example.ExampleOne");
+    templateOne.setDescription("Example of a Template");
+    templateOne.setDocumentationRef("https://docs.camunda.io");
     templateOne.setAppliesTo(new String[] {"bpmn:Task"});
     templateOne.setEntriesVisible(false);
 
     Template templateTwo = new Template();
     templateTwo.setTemplateName("ExampleTwo");
     templateTwo.setTemplateID("com.example.ExampleTwo");
+    templateTwo.setDescription("Example of a Template");
+    templateTwo.setDocumentationRef("https://docs.camunda.io");
     templateTwo.setAppliesTo(new String[] {"bpmn:Task"});
     templateTwo.setEntriesVisible(false);
 
@@ -228,6 +240,7 @@ public class GeneratorTest {
     templatePropertyExample.setType(TemplateProperty.STRING);
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of a property");
+    templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
     templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "null"));
     templatePropertyExample.setEditable(false);
     templatePropertyExample.setConstraint(new Constraint(true));
@@ -237,6 +250,7 @@ public class GeneratorTest {
     templateAdditionalPropertyExampleOne.setType(TemplateProperty.STRING);
     templateAdditionalPropertyExampleOne.setValue("exampleOne");
     templateAdditionalPropertyExampleOne.setDescription("Example of an additional property");
+    templateAdditionalPropertyExampleOne.setDocumentationRef("https://docs.camunda.io");
     templateAdditionalPropertyExampleOne.setBinding(
         new Binding("camunda:inputParameter", "exampleAdditionalPropertyOne"));
     templateAdditionalPropertyExampleOne.setEditable(false);
@@ -251,6 +265,7 @@ public class GeneratorTest {
     templateAdditionalPropertyExampleTwo.setType(TemplateProperty.STRING);
     templateAdditionalPropertyExampleTwo.setValue("exampleTwo");
     templateAdditionalPropertyExampleTwo.setDescription("Example of an additional property");
+    templateAdditionalPropertyExampleTwo.setDocumentationRef("https://docs.camunda.io");
     templateAdditionalPropertyExampleTwo.setBinding(templateAdditionalPropertyTwoBinding);
     templateAdditionalPropertyExampleTwo.setEditable(true);
     templateAdditionalPropertyExampleTwo.setConstraint(new Constraint(false));
@@ -293,12 +308,14 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testTemplateExternalTask() {
+  void testTemplateExternalTask() {
     List<Template> templates = new ArrayList<>();
 
     Template template = new Template();
     template.setTemplateName("External Task Example");
     template.setTemplateID("com.example.ExternalTaskExample");
+    template.setDescription("Example of a Template");
+    template.setDocumentationRef("https://docs.camunda.io");
     template.setAppliesTo(new String[] {"bpmn:Task"});
     template.setEntriesVisible(false);
 
@@ -307,6 +324,7 @@ public class GeneratorTest {
     templatePropertyExample.setType(TemplateProperty.STRING);
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of an additional property");
+    templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
     templatePropertyExample.setBinding(
         new Binding("camunda:inputParameter", "exampleAdditionalProperty"));
     templatePropertyExample.setEditable(false);
@@ -354,7 +372,7 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testTemplateJsonOutput() throws MojoExecutionException, IOException {
+  void testTemplateJsonOutput() throws MojoExecutionException, IOException {
     new Generator()
         .generate(
             "0.12.0",
@@ -374,7 +392,7 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testTemplateMixedJsonOutput() throws MojoExecutionException, IOException {
+  void testTemplateMixedJsonOutput() throws MojoExecutionException, IOException {
     new Generator()
         .generate(
             "0.12.0",
@@ -395,7 +413,7 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testTemplateParametersJsonOutput() throws MojoExecutionException, IOException {
+  void testTemplateParametersJsonOutput() throws MojoExecutionException, IOException {
     new Generator()
         .generate(
             "0.12.0",
@@ -416,7 +434,7 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testTemplateMultipleJsonOutput() throws MojoExecutionException, IOException {
+  void testTemplateMultipleJsonOutput() throws MojoExecutionException, IOException {
     new Generator()
         .generate(
             "0.12.0",
@@ -437,7 +455,7 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testTemplateExternalTaskJsonOutput() throws MojoExecutionException, IOException {
+  void testTemplateExternalTaskJsonOutput() throws MojoExecutionException, IOException {
     new Generator()
         .generate(
             "0.12.0",
@@ -459,7 +477,7 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testMalformedJSON() throws Exception {
+  void testMalformedJSON() throws Exception {
     JsonSchema schema =
         new Generator().downloadSchema(SCHEMA_BASE_URL + "@0.12.0" + "/resources/schema.json");
 
@@ -480,7 +498,7 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testMalformedSchemaURL() {
+  void testMalformedSchemaURL() {
     Exception exception =
         assertThrows(
             MojoExecutionException.class,
@@ -496,7 +514,7 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testBindingScriptFormat() {
+  void testBindingScriptFormat() {
     Binding expectedBinding = new Binding();
     expectedBinding.setType(INPUT_PARAMETER);
     expectedBinding.setName("exampleBinding");
@@ -510,7 +528,7 @@ public class GeneratorTest {
   }
 
   @Test
-  public void testDuplicateTemplateID() {
+  void testDuplicateTemplateID() {
     Exception exception =
         assertThrows(
             MojoExecutionException.class,

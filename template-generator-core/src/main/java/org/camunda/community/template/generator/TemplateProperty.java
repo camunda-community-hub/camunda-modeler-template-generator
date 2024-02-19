@@ -54,6 +54,11 @@ public @interface TemplateProperty {
   public String description() default "";
 
   /**
+   * @return documentationRef of the activity
+   */
+  public String documentationRef() default "";
+
+  /**
    * @return parameter type "input", "output" or "property"
    */
   public String parameterType() default INPUT;

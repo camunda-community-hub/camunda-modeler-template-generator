@@ -8,6 +8,7 @@ public class TestTemplateMultiple {
   @TemplateProperty(
       label = "Example Property", //
       description = "Example of a property", //
+      documentationRef = "https://docs.camunda.io", //
       parameterType = TemplateProperty.INPUT, //
       type = TemplateProperty.STRING, //
       value = "example", //
@@ -18,6 +19,8 @@ public class TestTemplateMultiple {
   @Template(
       name = "ExampleOne", //
       id = "com.example.ExampleOne", //
+      description = "Example of a Template", //
+      documentationRef = "https://docs.camunda.io", //
       appliesTo = {"bpmn:Task"}, //
       function = "exampleFunctionOne", //
       functionNameProperty = "exampleNamePropertyOne", //
@@ -26,6 +29,7 @@ public class TestTemplateMultiple {
         @TemplateProperty(
             label = "Example Additional Property One", //
             description = "Example of an additional property", //
+            documentationRef = "https://docs.camunda.io", //
             parameterType = TemplateProperty.INPUT, //
             type = TemplateProperty.STRING, //
             value = "exampleOne", //
@@ -38,6 +42,8 @@ public class TestTemplateMultiple {
   @Template(
       name = "ExampleTwo", //
       id = "com.example.ExampleTwo", //
+      description = "Example of a Template", //
+      documentationRef = "https://docs.camunda.io", //
       appliesTo = {"bpmn:Task"}, //
       function = "exampleFunctionTwo", //
       functionNameProperty = "exampleNamePropertyTwo", //
@@ -46,6 +52,7 @@ public class TestTemplateMultiple {
         @TemplateProperty(
             label = "Example Additional Property Two", //
             description = "Example of an additional property", //
+            documentationRef = "https://docs.camunda.io", //
             parameterType = TemplateProperty.OUTPUT, //
             type = TemplateProperty.STRING, //
             value = "exampleTwo", //
