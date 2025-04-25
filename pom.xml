@@ -4,7 +4,7 @@
 
     <groupId>org.camunda.community.template.generator</groupId>
     <artifactId>template-generator</artifactId>
-    <version>1.0.6-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -29,7 +29,7 @@
 			<timezone>Europe/Berlin</timezone>
 		</contributor>
 	</contributors>
-	
+
     <scm>
         <url>https://github.com/camunda-community-hub/camunda-modeler-template-generator</url>
         <connection>scm:git:git@github.com:camunda-community-hub/camunda-modeler-template-generator.git</connection>
