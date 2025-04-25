@@ -41,12 +41,6 @@ jobs:
           name: test-results
           path: target/surefire-reports/
           retention-days: 7
-      - name: Publish Unit Test Results
-        id: publish
-        uses: EnricoMi/publish-unit-test-result-action@v2.19.0
-        if: failure()
-        with:
-          files: target/surefire-reports/*.xml
       - if: github.event.release || github.event_name == 'workflow_dispatch'
         name: Deploy SNAPSHOT / Release
         uses: camunda-community-hub/community-action-maven-release@v1.2.1
