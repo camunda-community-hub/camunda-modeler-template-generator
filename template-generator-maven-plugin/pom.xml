@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.camunda.community.template.generator</groupId>
     <artifactId>template-generator</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -38,7 +38,7 @@
     <dependency>
       <groupId>org.camunda.community.template.generator</groupId>
       <artifactId>template-generator-core</artifactId>
-      <version>1.0.5</version>
+      <version>1.0.6-SNAPSHOT</version>
     </dependency>
 
     <dependency>
