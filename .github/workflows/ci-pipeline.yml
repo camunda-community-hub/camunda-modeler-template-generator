@@ -43,7 +43,7 @@ jobs:
           retention-days: 7
       - name: Publish Unit Test Results
         id: publish
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: EnricoMi/publish-unit-test-result-action@v2.19.0
         if: failure()
         with:
           files: target/surefire-reports/*.xml
