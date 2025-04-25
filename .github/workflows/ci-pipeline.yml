@@ -48,7 +48,7 @@ jobs:
         with:
           files: target/surefire-reports/*.xml
       - name: Deploy SNAPSHOT / Release
-        uses: camunda-community-hub/community-action-maven-release@v1.2.1
+        uses: camunda-community-hub/community-action-maven-release@v1.2.3
         with:
           release-version: ${{ github.event.release.tag_name }}
           nexus-usr: ${{ secrets.NEXUS_USR }}
