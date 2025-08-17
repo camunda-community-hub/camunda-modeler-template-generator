@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
 import org.camunda.community.template.generator.objectmodel.*;
 import org.camunda.community.template.generator.objectmodel.Choice;
+import org.camunda.community.template.generator.objectmodel.Pattern;
 import org.camunda.community.template.generator.objectmodel.Template;
 
 /** Parser class for the Template Generator Maven plugin */
@@ -47,6 +48,10 @@ public class GeneratorParser {
   public static final String CHOICES = "choices";
 
   public static final String NOTEMPTY = "notEmpty";
+
+  public static final String PATTERN = "pattern";
+
+  public static final String PATTERN_ERROR_MESSAGE = "patternErrorMessage";
 
   public static final String VALUE = "value";
 
@@ -177,8 +182,30 @@ public class GeneratorParser {
 
     property.setEditable(((Boolean) (fieldParameters.get(IS_EDITABLE))).booleanValue());
 
-    property.setConstraint(
-        new Constraint(((Boolean) (fieldParameters.get(NOTEMPTY))).booleanValue()));
+    boolean notEmpty = ((Boolean) (fieldParameters.get(NOTEMPTY))).booleanValue();
+    String patternValue = String.valueOf(fieldParameters.get(PATTERN));
+    String patternMessage = String.valueOf(fieldParameters.get(PATTERN_ERROR_MESSAGE));
+
+    if (notEmpty || !patternValue.isBlank()) {
+      Constraint constraint = new Constraint();
+
+      if (notEmpty) {
+        constraint.setNotEmpty(true);
+      }
+
+      if (!patternValue.isBlank()) {
+        Pattern pattern = new Pattern();
+        pattern.setValue(patternValue);
+
+        if (!patternMessage.isBlank()) {
+          pattern.setMessage(patternMessage);
+        }
+
+        constraint.setPattern(pattern);
+      }
+
+      property.setConstraint(constraint);
+    }
 
     return property;
   }
@@ -236,6 +263,7 @@ public class GeneratorParser {
     implementationTypeProperty.setType(TemplateProperty.HIDDEN);
     implementationTypeProperty.setValue(className);
     implementationTypeProperty.setBinding(parseBinding(PROPERTY, CLASS_PARAMETER, ""));
+    implementationTypeProperty.setEditable(false);
 
     return implementationTypeProperty;
   }
@@ -252,6 +280,7 @@ public class GeneratorParser {
 
     functionFieldProperty.setType(TemplateProperty.HIDDEN);
     functionFieldProperty.setValue(function);
+    functionFieldProperty.setEditable(false);
     functionFieldProperty.setBinding(
         parseBinding(TemplateProperty.INPUT, functionNameProperty, ""));
 
@@ -312,7 +341,15 @@ public class GeneratorParser {
 
       // Create the binding for a property
       String bindingType = String.valueOf(fieldParameters.get(PARAMETER_TYPE));
-      String bindingName = String.valueOf(fieldInfo.getConstantInitializerValue());
+      String bindingNameFromAnnotation = String.valueOf(fieldParameters.get(BINDING_NAME));
+      String bindingName;
+
+      if (!bindingNameFromAnnotation.isBlank()) {
+        bindingName = bindingNameFromAnnotation;
+      } else {
+        bindingName = fieldInfo.getName();
+      }
+
       String scriptFormat = String.valueOf(fieldParameters.get(SCRIPT_FORMAT));
       Binding binding = parseBinding(bindingType, bindingName, scriptFormat);
 

@@ -29,9 +29,6 @@
         "type": "Hidden",
         "value": "external",
         "editable": false,
-        "constraints": {
-          "notEmpty": false
-        },
         "binding": {
           "type": "property",
           "name": "camunda:type"
@@ -53,9 +50,6 @@
         "label": "External Task Priority",
         "type": "String",
         "editable": true,
-        "constraints": {
-          "notEmpty": false
-        },
         "binding": {
           "type": "property",
           "name": "camunda:taskPriority"

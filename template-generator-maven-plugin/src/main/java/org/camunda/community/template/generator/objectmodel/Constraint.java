@@ -3,27 +3,38 @@ package org.camunda.community.template.generator.objectmodel;
 /** A constrained that is contained by a property */
 public class Constraint {
 
-  private boolean notEmpty;
+  private Boolean notEmpty;
+  private Pattern pattern;
+
+  public Constraint() {
+    super();
+  }
 
   /**
    * @return notEmpty
    */
-  public boolean isNotEmpty() {
+  public Boolean isNotEmpty() {
     return notEmpty;
   }
 
   /**
    * @param notEmpty
    */
-  public void setNotEmpty(boolean notEmpty) {
+  public void setNotEmpty(Boolean notEmpty) {
     this.notEmpty = notEmpty;
   }
 
   /**
-   * @param notEmpty
+   * @return pattern
    */
-  public Constraint(boolean notEmpty) {
-    super();
-    this.notEmpty = notEmpty;
+  public Pattern getPattern() {
+    return pattern;
+  }
+
+  /**
+   * @param pattern
+   */
+  public void setPattern(Pattern pattern) {
+    this.pattern = pattern;
   }
 }
