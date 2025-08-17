@@ -79,6 +79,16 @@ public @interface TemplateProperty {
   public boolean notEmpty() default false;
 
   /**
+   * @return pattern for the property
+   */
+  public String pattern() default "";
+
+  /**
+   * @return error message for the pattern
+   */
+  public String patternErrorMessage() default "";
+
+  /**
    * @return whether the property should be editable by the user or not
    */
   public boolean isEditable() default true;

@@ -1,0 +1,53 @@
+[
+  {
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.12.0/resources/schema.json",
+    "name": "Pattern Example",
+    "id": "com.example.PatternExample",
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "entriesVisible": true,
+    "properties": [
+      {
+        "label": "Property with pattern",
+        "type": "String",
+        "editable": true,
+        "constraints": {
+          "pattern": {
+            "value": "^[a-zA-Z0-9]+$",
+            "message": "Only alphanumeric characters are allowed."
+          }
+        },
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "propertyWithPattern"
+        }
+      },
+      {
+        "label": "Property with pattern and notEmpty",
+        "type": "String",
+        "editable": true,
+        "constraints": {
+          "notEmpty": true,
+          "pattern": {
+            "value": "^\\d{4}$",
+            "message": "Must be a 4-digit number."
+          }
+        },
+        "binding": {
+          "type": "camunda:inputParameter",
+          "name": "propertyWithPatternAndNotEmpty"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "org.camunda.community.template.generator.test.templatepattern.TestTemplatePattern",
+        "editable": false,
+        "binding": {
+          "type": "property",
+          "name": "camunda:class"
+        }
+      }
+    ]
+  }
+]

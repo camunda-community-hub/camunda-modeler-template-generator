@@ -54,6 +54,8 @@ The following matrix gives an overview about the arguments for this annotation:
 |bindingName|String|""|✔️|The binding name that is used together with the parameter type.|
 |scriptFormat|String|""|✔️|The script format to use within the binding.|
 |notEmpty|boolean|false|✔️|Option to say whether an input can be empty or not.|
+|pattern|String|""|✔️|A regex pattern to validate the input against.|
+|patternErrorMessage|String|""|✔️|A custom error message to display if the pattern validation fails.|
 |isEditable|boolean|true|✔️|Option to say whether an input can be edited by the user or not.|
 
 `@Template`
