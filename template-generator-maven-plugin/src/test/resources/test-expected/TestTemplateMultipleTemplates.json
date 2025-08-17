@@ -46,7 +46,7 @@
         },
         "binding": {
           "type": "camunda:inputParameter",
-          "name": "null"
+          "name": "test"
         }
       },
       {
@@ -78,9 +78,6 @@
         "description": "Example of an additional property",
         "documentationRef": "https://docs.camunda.io",
         "editable": true,
-        "constraints": {
-          "notEmpty": false
-        },
         "binding": {
           "type": "camunda:outputParameter",
           "source": "${exampleAdditionalPropertyTwo}"
@@ -107,7 +104,7 @@
         },
         "binding": {
           "type": "camunda:inputParameter",
-          "name": "null"
+          "name": "test"
         }
       },
       {

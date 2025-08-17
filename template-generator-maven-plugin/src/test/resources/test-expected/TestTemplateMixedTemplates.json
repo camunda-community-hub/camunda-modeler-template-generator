@@ -46,7 +46,7 @@
         },
         "binding": {
           "type": "camunda:inputParameter",
-          "name": "null"
+          "name": "test"
         }
       },
       {

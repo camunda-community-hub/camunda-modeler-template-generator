@@ -42,6 +42,8 @@ class GeneratorTest {
 
   List<ClassInfo> classInfosTemplateExternalTask = new ArrayList<>();
 
+  List<ClassInfo> classInfosTemplatePattern = new ArrayList<>();
+
   ClassInfoList scan(String scanPackages) {
     ScanResult scanResult = new ClassGraph().acceptPackages(scanPackages).enableAllInfo().scan();
 
@@ -79,6 +81,12 @@ class GeneratorTest {
       classInfosTemplateExternalTask.clear();
       classInfosTemplateExternalTask.add(classInfo);
     }
+
+    for (ClassInfo classInfo :
+        scan("org.camunda.community.template.generator.test.templatepattern")) {
+      classInfosTemplatePattern.clear();
+      classInfosTemplatePattern.add(classInfo);
+    }
   }
 
   @Test
@@ -102,19 +110,23 @@ class GeneratorTest {
     templatePropertyExample.setBinding(
         new Binding("camunda:inputParameter", "exampleAdditionalProperty"));
     templatePropertyExample.setEditable(false);
-    templatePropertyExample.setConstraint(new Constraint(true));
+    Constraint constraint = new Constraint();
+    constraint.setNotEmpty(true);
+    templatePropertyExample.setConstraint(constraint);
 
     Property templateProperty = new Property();
     templateProperty.setType(TemplateProperty.HIDDEN);
     templateProperty.setValue(
         "org.camunda.community.template.generator.test.template.TestTemplate");
     templateProperty.setBinding(new Binding(TemplateProperty.PROPERTY, "camunda:class"));
+    templateProperty.setEditable(false);
 
     Property templateFunctionProperty = new Property();
     templateFunctionProperty.setType(TemplateProperty.HIDDEN);
     templateFunctionProperty.setValue("exampleFunction");
     templateFunctionProperty.setBinding(
         new Binding("camunda:inputParameter", "exampleNameProperty"));
+    templateFunctionProperty.setEditable(false);
 
     template.addTemplateProperty(templatePropertyExample);
     template.addTemplateProperty(templateFunctionProperty);
@@ -142,9 +154,11 @@ class GeneratorTest {
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of a property");
     templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
-    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "null"));
+    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "test"));
     templatePropertyExample.setEditable(false);
-    templatePropertyExample.setConstraint(new Constraint(true));
+    Constraint constraint = new Constraint();
+    constraint.setNotEmpty(true);
+    templatePropertyExample.setConstraint(constraint);
 
     properties.add(templatePropertyExample);
 
@@ -166,7 +180,7 @@ class GeneratorTest {
     template.setAppliesTo(new String[] {"bpmn:Task"});
     template.setEntriesVisible(false);
 
-    Constraint constraint = new Constraint(false);
+    Constraint constraint = new Constraint();
     constraint.setNotEmpty(true);
 
     Property templatePropertyExample = new Property();
@@ -175,7 +189,7 @@ class GeneratorTest {
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of a property");
     templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
-    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "null"));
+    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "test"));
     templatePropertyExample.setEditable(false);
     templatePropertyExample.setConstraint(constraint);
 
@@ -188,19 +202,23 @@ class GeneratorTest {
     templateAdditionalPropertyExample.setBinding(
         new Binding("camunda:inputParameter", "exampleAdditionalProperty"));
     templateAdditionalPropertyExample.setEditable(false);
-    templateAdditionalPropertyExample.setConstraint(new Constraint(true));
+    Constraint constraint2 = new Constraint();
+    constraint2.setNotEmpty(true);
+    templateAdditionalPropertyExample.setConstraint(constraint2);
 
     Property templateProperty = new Property();
     templateProperty.setType(TemplateProperty.HIDDEN);
     templateProperty.setValue(
         "org.camunda.community.template.generator.test.templatemixed.TestTemplateMixed");
     templateProperty.setBinding(new Binding(TemplateProperty.PROPERTY, "camunda:class"));
+    templateProperty.setEditable(false);
 
     Property templateFunctionProperty = new Property();
     templateFunctionProperty.setType(TemplateProperty.HIDDEN);
     templateFunctionProperty.setValue("exampleFunction");
     templateFunctionProperty.setBinding(
         new Binding("camunda:inputParameter", "exampleNameProperty"));
+    templateFunctionProperty.setEditable(false);
 
     template.addTemplateProperty(templateAdditionalPropertyExample);
     template.addTemplateProperty(templateFunctionProperty);
@@ -241,9 +259,11 @@ class GeneratorTest {
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of a property");
     templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
-    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "null"));
+    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "test"));
     templatePropertyExample.setEditable(false);
-    templatePropertyExample.setConstraint(new Constraint(true));
+    Constraint constraint1 = new Constraint();
+    constraint1.setNotEmpty(true);
+    templatePropertyExample.setConstraint(constraint1);
 
     Property templateAdditionalPropertyExampleOne = new Property();
     templateAdditionalPropertyExampleOne.setLabel("Example Additional Property One");
@@ -254,7 +274,9 @@ class GeneratorTest {
     templateAdditionalPropertyExampleOne.setBinding(
         new Binding("camunda:inputParameter", "exampleAdditionalPropertyOne"));
     templateAdditionalPropertyExampleOne.setEditable(false);
-    templateAdditionalPropertyExampleOne.setConstraint(new Constraint(true));
+    Constraint constraint2 = new Constraint();
+    constraint2.setNotEmpty(true);
+    templateAdditionalPropertyExampleOne.setConstraint(constraint2);
 
     Binding templateAdditionalPropertyTwoBinding = new Binding();
     templateAdditionalPropertyTwoBinding.setType("camunda:outputParameter");
@@ -268,25 +290,27 @@ class GeneratorTest {
     templateAdditionalPropertyExampleTwo.setDocumentationRef("https://docs.camunda.io");
     templateAdditionalPropertyExampleTwo.setBinding(templateAdditionalPropertyTwoBinding);
     templateAdditionalPropertyExampleTwo.setEditable(true);
-    templateAdditionalPropertyExampleTwo.setConstraint(new Constraint(false));
 
     Property templateProperty = new Property();
     templateProperty.setType(TemplateProperty.HIDDEN);
     templateProperty.setValue(
         "org.camunda.community.template.generator.test.templatemultiple.TestTemplateMultiple");
     templateProperty.setBinding(new Binding(TemplateProperty.PROPERTY, "camunda:class"));
+    templateProperty.setEditable(false);
 
     Property templateFunctionPropertyOne = new Property();
     templateFunctionPropertyOne.setType(TemplateProperty.HIDDEN);
     templateFunctionPropertyOne.setValue("exampleFunctionOne");
     templateFunctionPropertyOne.setBinding(
         new Binding("camunda:inputParameter", "exampleNamePropertyOne"));
+    templateFunctionPropertyOne.setEditable(false);
 
     Property templateFunctionPropertyTwo = new Property();
     templateFunctionPropertyTwo.setType(TemplateProperty.HIDDEN);
     templateFunctionPropertyTwo.setValue("exampleFunctionTwo");
     templateFunctionPropertyTwo.setBinding(
         new Binding("camunda:inputParameter", "exampleNamePropertyTwo"));
+    templateFunctionPropertyTwo.setEditable(false);
 
     templateOne.addTemplateProperty(templateAdditionalPropertyExampleOne);
     templateOne.addTemplateProperty(templateFunctionPropertyOne);
@@ -328,27 +352,29 @@ class GeneratorTest {
     templatePropertyExample.setBinding(
         new Binding("camunda:inputParameter", "exampleAdditionalProperty"));
     templatePropertyExample.setEditable(false);
-    templatePropertyExample.setConstraint(new Constraint(true));
+    Constraint constraint1 = new Constraint();
+    constraint1.setNotEmpty(true);
+    templatePropertyExample.setConstraint(constraint1);
 
     Property externalTaskFunctionProperty = new Property();
     externalTaskFunctionProperty.setType(TemplateProperty.HIDDEN);
     externalTaskFunctionProperty.setValue("external");
     externalTaskFunctionProperty.setEditable(false);
     externalTaskFunctionProperty.setBinding(new Binding(TemplateProperty.PROPERTY, "camunda:type"));
-    externalTaskFunctionProperty.setConstraint(new Constraint(false));
 
     Property externalTaskTopic = new Property();
     externalTaskTopic.setLabel("External Topic");
     externalTaskTopic.setType(TemplateProperty.STRING);
     externalTaskTopic.setEditable(true);
-    externalTaskTopic.setConstraint(new Constraint(true));
+    Constraint constraint2 = new Constraint();
+    constraint2.setNotEmpty(true);
+    externalTaskTopic.setConstraint(constraint2);
     externalTaskTopic.setBinding(new Binding(TemplateProperty.PROPERTY, "camunda:topic"));
 
     Property externalTaskPriority = new Property();
     externalTaskPriority.setLabel("External Task Priority");
     externalTaskPriority.setType(TemplateProperty.STRING);
     externalTaskPriority.setEditable(true);
-    externalTaskPriority.setConstraint(new Constraint(false));
     externalTaskPriority.setBinding(new Binding(TemplateProperty.PROPERTY, "camunda:taskPriority"));
 
     Property templateProperty = new Property();
@@ -356,6 +382,7 @@ class GeneratorTest {
     templateProperty.setValue(
         "org.camunda.community.template.generator.test.templateexternaltask.TestTemplateExternalTask");
     templateProperty.setBinding(new Binding(TemplateProperty.PROPERTY, "camunda:class"));
+    templateProperty.setEditable(false);
 
     template.addTemplateProperty(templatePropertyExample);
     template.addTemplateProperty(externalTaskFunctionProperty);
@@ -367,6 +394,58 @@ class GeneratorTest {
 
     List<Template> resultTemplates =
         GeneratorParser.processTemplates(classInfosTemplateExternalTask.get(0));
+
+    assertThat(resultTemplates).usingRecursiveComparison().isEqualTo(templates);
+  }
+
+  @Test
+  void testTemplatePattern() {
+    List<Template> templates = new ArrayList<>();
+
+    Template template = new Template();
+    template.setTemplateName("Pattern Example");
+    template.setTemplateID("com.example.PatternExample");
+    template.setAppliesTo(new String[] {"bpmn:ServiceTask"});
+    template.setEntriesVisible(true);
+
+    Property prop1 = new Property();
+    prop1.setLabel("Property with pattern");
+    prop1.setType(TemplateProperty.STRING);
+    prop1.setEditable(true);
+    prop1.setBinding(new Binding(INPUT_PARAMETER, "propertyWithPattern"));
+    Constraint constraint1 = new Constraint();
+    constraint1.setPattern(
+        new org.camunda.community.template.generator.objectmodel.Pattern(
+            "^[a-zA-Z0-9]+$", "Only alphanumeric characters are allowed."));
+    prop1.setConstraint(constraint1);
+
+    Property prop2 = new Property();
+    prop2.setLabel("Property with pattern and notEmpty");
+    prop2.setType(TemplateProperty.STRING);
+    prop2.setEditable(true);
+    prop2.setBinding(new Binding(INPUT_PARAMETER, "propertyWithPatternAndNotEmpty"));
+    Constraint constraint2 = new Constraint();
+    constraint2.setNotEmpty(true);
+    constraint2.setPattern(
+        new org.camunda.community.template.generator.objectmodel.Pattern(
+            "^\\d{4}$", "Must be a 4-digit number."));
+    prop2.setConstraint(constraint2);
+
+    Property implProperty = new Property();
+    implProperty.setType(TemplateProperty.HIDDEN);
+    implProperty.setValue(
+        "org.camunda.community.template.generator.test.templatepattern.TestTemplatePattern");
+    implProperty.setBinding(new Binding(TemplateProperty.PROPERTY, "camunda:class"));
+    implProperty.setEditable(false);
+
+    template.addTemplateProperty(prop1);
+    template.addTemplateProperty(prop2);
+    template.addTemplateProperty(implProperty);
+
+    templates.add(template);
+
+    List<Template> resultTemplates =
+        GeneratorParser.processTemplates(classInfosTemplatePattern.get(0));
 
     assertThat(resultTemplates).usingRecursiveComparison().isEqualTo(templates);
   }
@@ -471,6 +550,27 @@ class GeneratorTest {
         FileUtils.fileRead(
                 new File(
                     "target/test-files/resources/actual/TestTemplateExternalTaskTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
+        "Files are not equal!");
+  }
+
+  @Test
+  void testTemplatePatternJsonOutput() throws MojoExecutionException, IOException {
+    new Generator()
+        .generate(
+            "0.12.0",
+            "org.camunda.community.template.generator.test.templatepattern",
+            "target/test-files/resources/actual",
+            false);
+
+    assertEquals(
+        FileUtils.fileRead(
+                new File("src/test/resources/test-expected/TestTemplatePatternTemplates.json"))
+            .replace("\n", "")
+            .replace("\r", ""),
+        FileUtils.fileRead(
+                new File("target/test-files/resources/actual/TestTemplatePatternTemplates.json"))
             .replace("\n", "")
             .replace("\r", ""),
         "Files are not equal!");
