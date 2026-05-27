@@ -14,7 +14,7 @@ public class TestTemplateMultiple {
       value = "example", //
       notEmpty = true, //
       isEditable = false)
-  String test = "test";
+  static final String TEST_PARAM = "testValue";
 
   @Template(
       name = "ExampleOne", //

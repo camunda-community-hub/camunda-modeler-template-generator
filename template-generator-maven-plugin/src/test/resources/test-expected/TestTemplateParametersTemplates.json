@@ -37,7 +37,7 @@
         },
         "binding": {
           "type": "camunda:inputParameter",
-          "name": "test"
+          "name": "testValue"
         }
       },
       {

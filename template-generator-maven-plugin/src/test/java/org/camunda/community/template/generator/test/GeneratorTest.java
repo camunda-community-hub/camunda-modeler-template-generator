@@ -154,7 +154,7 @@ class GeneratorTest {
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of a property");
     templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
-    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "test"));
+    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "testValue"));
     templatePropertyExample.setEditable(false);
     Constraint constraint = new Constraint();
     constraint.setNotEmpty(true);
@@ -189,7 +189,7 @@ class GeneratorTest {
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of a property");
     templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
-    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "test"));
+    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "testValue"));
     templatePropertyExample.setEditable(false);
     templatePropertyExample.setConstraint(constraint);
 
@@ -259,7 +259,7 @@ class GeneratorTest {
     templatePropertyExample.setValue("example");
     templatePropertyExample.setDescription("Example of a property");
     templatePropertyExample.setDocumentationRef("https://docs.camunda.io");
-    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "test"));
+    templatePropertyExample.setBinding(new Binding("camunda:inputParameter", "testValue"));
     templatePropertyExample.setEditable(false);
     Constraint constraint1 = new Constraint();
     constraint1.setNotEmpty(true);
@@ -412,7 +412,7 @@ class GeneratorTest {
     prop1.setLabel("Property with pattern");
     prop1.setType(TemplateProperty.STRING);
     prop1.setEditable(true);
-    prop1.setBinding(new Binding(INPUT_PARAMETER, "propertyWithPattern"));
+    prop1.setBinding(new Binding(INPUT_PARAMETER, "prop1"));
     Constraint constraint1 = new Constraint();
     constraint1.setPattern(
         new org.camunda.community.template.generator.objectmodel.Pattern(
@@ -423,7 +423,7 @@ class GeneratorTest {
     prop2.setLabel("Property with pattern and notEmpty");
     prop2.setType(TemplateProperty.STRING);
     prop2.setEditable(true);
-    prop2.setBinding(new Binding(INPUT_PARAMETER, "propertyWithPatternAndNotEmpty"));
+    prop2.setBinding(new Binding(INPUT_PARAMETER, "prop2"));
     Constraint constraint2 = new Constraint();
     constraint2.setNotEmpty(true);
     constraint2.setPattern(

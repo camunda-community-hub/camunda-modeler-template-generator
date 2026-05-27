@@ -5,7 +5,7 @@ import org.camunda.community.template.generator.TemplateProperty;
 
 public class TestTemplateExternalTask {
 
-  String test = "test";
+  static final String TEST_PARAM = "testValue";
 
   @Template(
       name = "External Task Example", //

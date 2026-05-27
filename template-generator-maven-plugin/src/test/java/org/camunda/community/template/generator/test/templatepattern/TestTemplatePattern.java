@@ -10,7 +10,7 @@ public class TestTemplatePattern {
       type = TemplateProperty.STRING,
       pattern = "^[a-zA-Z0-9]+$",
       patternErrorMessage = "Only alphanumeric characters are allowed.")
-  String propertyWithPattern = "prop1";
+  static final String PROPERTY_WITH_PATTERN = "prop1";
 
   @TemplateProperty(
       label = "Property with pattern and notEmpty",
@@ -18,7 +18,7 @@ public class TestTemplatePattern {
       notEmpty = true,
       pattern = "^\\d{4}$",
       patternErrorMessage = "Must be a 4-digit number.")
-  String propertyWithPatternAndNotEmpty = "prop2";
+  static final String PROPERTY_WITH_PATTERN_AND_NOT_EMPTY = "prop2";
 
   @Template(
       name = "Pattern Example",

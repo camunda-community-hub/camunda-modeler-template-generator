@@ -46,7 +46,7 @@
         },
         "binding": {
           "type": "camunda:inputParameter",
-          "name": "test"
+          "name": "testValue"
         }
       },
       {
@@ -104,7 +104,7 @@
         },
         "binding": {
           "type": "camunda:inputParameter",
-          "name": "test"
+          "name": "testValue"
         }
       },
       {
