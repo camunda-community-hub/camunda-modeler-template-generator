@@ -16,7 +16,7 @@ public class TestTemplateParameters {
       value = "example", //
       notEmpty = true, //
       isEditable = false)
-  String test = "test";
+  static final String TEST_PARAM = "testValue";
 
   @Template(
       name = "Example", //

@@ -20,7 +20,7 @@
         },
         "binding": {
           "type": "camunda:inputParameter",
-          "name": "propertyWithPattern"
+          "name": "prop1"
         }
       },
       {
@@ -36,7 +36,7 @@
         },
         "binding": {
           "type": "camunda:inputParameter",
-          "name": "propertyWithPatternAndNotEmpty"
+          "name": "prop2"
         }
       },
       {

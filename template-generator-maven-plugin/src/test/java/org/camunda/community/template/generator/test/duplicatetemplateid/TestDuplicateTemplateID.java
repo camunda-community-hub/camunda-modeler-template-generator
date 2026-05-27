@@ -6,7 +6,7 @@ import org.camunda.community.template.generator.test.template.TestTemplate;
 
 public class TestDuplicateTemplateID extends TestTemplate {
 
-  String test = "test";
+  static final String TEST_PARAM = "testValue";
 
   @Template(
       name = "Example", //

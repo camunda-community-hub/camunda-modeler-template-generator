@@ -347,7 +347,8 @@ public class GeneratorParser {
       if (!bindingNameFromAnnotation.isBlank()) {
         bindingName = bindingNameFromAnnotation;
       } else {
-        bindingName = fieldInfo.getName();
+        Object constantValue = fieldInfo.getConstantInitializerValue();
+        bindingName = constantValue != null ? String.valueOf(constantValue) : fieldInfo.getName();
       }
 
       String scriptFormat = String.valueOf(fieldParameters.get(SCRIPT_FORMAT));
