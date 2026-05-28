@@ -26,11 +26,17 @@ jobs:
           distribution: temurin
           cache: maven
           gpg-private-key: ${{ secrets.MAVEN_CENTRAL_GPG_SIGNING_KEY_SEC }}
-          gpg-passphrase: MAVEN_CENTRAL_GPG_PASSPHRASE
+          # Name der Environment-Variable, in der setup-java die Passphrase erwartet.
+          # Diese ENV-Variable wird im nächsten Step explizit gesetzt.
+          gpg-passphrase: MAVEN_CENTRAL_GPG_SIGNING_KEY_PASSPHRASE
 
       - name: Deploy SNAPSHOT / Release
         uses: camunda-community-hub/community-action-maven-release@v2
         id: release
+        env:
+          # Passphrase als ENV-Variable verfügbar machen, damit der GPG-Agent sie liest,
+          # wenn Maven das Signing-Plugin aufruft.
+          MAVEN_CENTRAL_GPG_SIGNING_KEY_PASSPHRASE: ${{ secrets.MAVEN_CENTRAL_GPG_SIGNING_KEY_PASSPHRASE }}
         with:
           release-version: ${{ github.event.release.tag_name }}
           nexus-usr: ${{ secrets.NEXUS_USR }}
